@@ -8,12 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.bininfo.network.BinApi
 import kotlinx.coroutines.launch
 
-class BinViewModel(BIN: Int) : ViewModel() {
+class BinViewModel() : ViewModel() {
     var binUiStatus: String by mutableStateOf("")
-
-    init {
-        getBinInfo(BIN)
-    }
+        private set
 
     fun getBinInfo(BIN: Int) {
         viewModelScope.launch {
