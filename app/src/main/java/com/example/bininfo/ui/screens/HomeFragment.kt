@@ -1,8 +1,6 @@
 package com.example.bininfo.ui.screens
 
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.bininfo.R
 import com.example.bininfo.utilits.AppTextWatcher
@@ -13,13 +11,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onStart() {
         super.onStart()
-/*        enterCardNumber.addTextChangedListener(AppTextWatcher {
+        enterCardNumber.addTextChangedListener(AppTextWatcher {
             val string = enterCardNumber.text.toString()
-            if (string > 4) {
-                val value = response.getBinInfo(string.toInt()).binUiStatus
+            if (string.length > 4) {
+                val value = response.getBinInfo(string.toInt())
                 Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
-            })
-
-        }*/
+            }
+        })
     }
 }
