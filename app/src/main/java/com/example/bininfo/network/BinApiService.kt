@@ -1,20 +1,23 @@
 package com.example.bininfo.network
 
+import com.example.bininfo.BinCard
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 private const val BASE_URL = "https://lookup.binlist.net/"
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
     .baseUrl(BASE_URL)
     .build()
 
 interface BinApiService {
     @GET("{BIN}")
-    suspend fun getBinInfo(@Path("BIN", encoded = true) BIN: String): String
+    suspend fun getBinInfo(@Path("BIN", encoded = true) BIN: String): BinCard
 }
 
 object BinApi{

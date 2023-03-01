@@ -1,21 +1,21 @@
 package com.example.bininfo.ui.screens
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bininfo.BinCard
 import com.example.bininfo.network.BinApi
 import kotlinx.coroutines.launch
 
 class BinViewModel() : ViewModel() {
-    var binUiStatus: String by mutableStateOf("")
-        private set
+    private val _binUiStatus = MutableLiveData<BinCard>()
+    val binUiStatus: LiveData<BinCard> = _binUiStatus
 
-    fun getBinInfo(BIN: Int) {
+    fun getBinInfo(BIN: String) {
         viewModelScope.launch {
-            val listResult = BinApi.retrofitService.getBinInfo(BIN.toString())
-            binUiStatus = listResult
+            val listResult = BinApi.retrofitService.getBinInfo(BIN)
+            _binUiStatus.value = listResult
         }
     }
 }

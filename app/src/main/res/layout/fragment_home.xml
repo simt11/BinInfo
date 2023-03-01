@@ -8,7 +8,7 @@
     tools:context=".ui.screens.HomeFragment">
 
     <TextView
-        android:id="@+id/textCardNumber"
+        android:id="@+id/handCardNumber"
         android:text="@string/enter_card_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,19 +20,157 @@
         android:hint="@string/hint_card_number"
         android:maxLength="8"
         android:inputType="number"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textCardNumber"
+        app:layout_constraintTop_toBottomOf="@id/handCardNumber"
         style="@style/editCard" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/register_btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:scaleType="center"
+
+        android:layout_margin="@dimen/horizontal_margin"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:src="@drawable/baseline_check_circle_50"
+        app:borderWidth="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="TODO" />
+
     <TextView
-        android:id="@+id/textAnswer"
+        android:id="@+id/textSCHEME"
+        android:text="@string/text_sheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/enterCardNumber"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-         />
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerSCHEME"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSCHEME"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textBRAND"
+        android:text="@string/text_brand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerSCHEME"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerBRAND"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBRAND"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textLength"
+        android:text="@string/text_length"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBRAND"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerLength"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLength"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textLuhn"
+        android:text="@string/text_luhn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerLength"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerLuhn"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLuhn"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textType"
+        android:text="@string/text_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerLuhn"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerType"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textType"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textPrepaid"
+        android:text="@string/text_prepaid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerType"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerPrepaid"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textPrepaid"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textCountry"
+        android:text="@string/text_country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerPrepaid"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerCountry"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textCountry"
+        style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/textBank"
+        android:text="@string/text_bank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerCountry"
+        style="@style/text_param" />
+
+    <TextView
+        android:id="@+id/answerBank"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBank"
+        style="@style/answer_param" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
