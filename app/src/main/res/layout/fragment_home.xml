@@ -138,7 +138,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textPrepaid"
         style="@style/answer_param" />
-
+    <!-- ******  Информация по стране  *************** -->
     <TextView
         android:id="@+id/textCountry"
         android:text="@string/text_country"
@@ -156,20 +156,58 @@
         style="@style/answer_param" />
 
     <TextView
+        android:id="@+id/answerCoordinates"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerCountry"
+        style="@style/answer_param"
+        android:clickable="true"/>
+    <!-- ******  Информация по стране  *************** -->
+
+    <!-- ******  Информация по банку  *************** -->
+    <TextView
         android:id="@+id/textBank"
         android:text="@string/text_bank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/answerCountry"
+        app:layout_constraintTop_toBottomOf="@id/answerCoordinates"
         style="@style/text_param" />
 
     <TextView
-        android:id="@+id/answerBank"
+        android:id="@+id/answerBankName"
         android:hint="@string/hint_answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textBank"
         style="@style/answer_param" />
+
+    <TextView
+        android:id="@+id/answerBankUrl"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankName"
+        style="@style/answer_param"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/answerBankPhone"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankUrl"
+        style="@style/answer_param"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/answerBankCity"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankPhone"
+        style="@style/answer_param"/>
+    <!-- ******  Информация по банку  *************** -->
 
 
 

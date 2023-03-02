@@ -4,34 +4,36 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BinCard(
-    val number: Number?,
-    val scheme: String?,
-    val type: String?,
-    val brand: String?,
-    val prepaid: Boolean?,
-    val country: Country?,
-    val bank: Bank?
+    val number: Number? = null,
+    val scheme: String? = null,
+    val type: String? = null,
+    val brand: String? = null,
+    val prepaid: Boolean? = null,
+    val country: Country? = null,
+    val bank: Bank? = null,
 ) {
     @Serializable
     class Number(
-        val length: Int?,
-        val luhn: Boolean?,
+        val length: Int? = null,
+        val luhn: Boolean? = null,
     ) {}
 
     @Serializable
     class Country(
-        val numeric: String,
-        val alpha2: String,
-        val name: String,
-        val emoji: String,
-        val currency: String,
-        val latitude: Int,
-        val longitude: Int) {}
+        val numeric: String? = null,
+        val alpha2: String? = null,
+        val name: String? = null,
+        val emoji: String? = null,
+        val currency: String? = null,
+        val latitude: Int? = null,
+        val longitude: Int? = null,
+    ) {}
 
     @Serializable
     class Bank(
-        val name: String,
-        val url: String,
-        val phone: String,
-        val city: String) {}
+        val name: String? = null,
+        val url: String? = null,
+        val phone: String? = null,
+        val city: String? = null,
+    ) {}
 }

@@ -17,6 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        replaceFragment(HomeFragment(), false)
+        replaceFragment(HomeFragment(this), false)
     }
 }

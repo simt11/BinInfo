@@ -18,7 +18,7 @@
     </style>
 
     <style name="text_param">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -26,7 +26,7 @@
     </style>
 
     <style name="answer_param">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_height">wrap_content</item>

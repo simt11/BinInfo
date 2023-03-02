@@ -16,3 +16,4 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack:Boolean = tru
             .commit()
     }
 }
+
