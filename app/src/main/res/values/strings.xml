@@ -13,4 +13,5 @@
     <string name="text_country">Страна:</string>
     <string name="text_bank">Банк</string>
     <string name="hint_answer">...</string>
+    <string name="toast_min_number">Введите минимум 5 цифр номера карты.</string>
 </resources>

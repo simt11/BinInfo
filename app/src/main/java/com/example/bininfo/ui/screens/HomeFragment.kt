@@ -1,8 +1,7 @@
 package com.example.bininfo.ui.screens
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bininfo.BinCard
 import com.example.bininfo.R
 import com.example.bininfo.databinding.FragmentHomeBinding
-import com.example.bininfo.utilits.AppTextWatcher
+import com.example.bininfo.utilits.hideKeyboard
+import com.example.bininfo.utilits.intentCoordinates
+import com.example.bininfo.utilits.intentPhone
+import com.example.bininfo.utilits.intentUrl
+import com.example.bininfo.utilits.showToast
+
+val BIN_NUMBER: String = ""
+private const val MIN_LENGTH_CARD = 4
 
 class HomeFragment(context: Context) : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: BinViewModel
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,46 +32,66 @@ class HomeFragment(context: Context) : Fragment(R.layout.fragment_home) {
     ): View? {
         this.binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this).get(BinViewModel::class.java)
-        binding.enterCardNumber.addTextChangedListener(AppTextWatcher {
+
+        binding.root.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            false
+        }
+        binding.enterCardNumber.setOnClickListener { true }
+        binding.registerBtnNext.setOnClickListener {
             val string = binding.enterCardNumber.text.toString()
-            if (string.length > 4) {
+            if (string.length > MIN_LENGTH_CARD) {
+                hideKeyboard()
                 viewModel.getBinInfo(string)
                 viewModel.binUiStatus.observe(viewLifecycleOwner) { listResults ->
                     setValue(listResults)
                 }
+            } else {
+                showToast(getString(R.string.toast_min_number))
             }
-        })
+        }
 
         binding.answerCoordinates.setOnClickListener {
             val Coordinates = binding.answerCoordinates.text.toString()
-            if (binding.answerCoordinates.text.isNotEmpty()) {
-                val queryCoordinates: Uri = Uri.parse("geo:${Coordinates}")
-                val intent = Intent(Intent.ACTION_VIEW, queryCoordinates)
-                context?.startActivity(intent)
+            if (Coordinates.isNotEmpty()) {
+                intentCoordinates(Coordinates)
             }
         }
         binding.answerBankUrl.setOnClickListener {
             val bankUrl = binding.answerBankUrl.text.toString()
-            if (binding.answerBankUrl.text.isNotEmpty()) {
-                val queryUrl: Uri = Uri.parse("https://${bankUrl}")
-                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-                context?.startActivity(intent)
+            if (bankUrl.isNotEmpty()) {
+                intentUrl(bankUrl)
             }
         }
         binding.answerBankPhone.setOnClickListener {
             val bankPhone = binding.answerBankPhone.text.toString()
-            if (binding.answerBankPhone.text.isNotEmpty()) {
-                val queryPhone: Uri = Uri.parse("{bankPhone}")
-                val intent = Intent(Intent.ACTION_DIAL, queryPhone)
-                context?.startActivity(intent)
+            if (bankPhone.isNotEmpty()) {
+                intentPhone(bankPhone)
             }
         }
+    }
 
+    override fun onPause() {
+        super.onPause()
+        val editor = preferences.edit()
+        val string = binding.enterCardNumber.text.toString()
+        editor.putString(BIN_NUMBER, string)
+        editor.apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (preferences.contains(BIN_NUMBER)) {
+            val string = preferences.getString(BIN_NUMBER, "")
+            binding.enterCardNumber.setText(string)
+        }
     }
 
     fun setValue(listResults: BinCard) {
