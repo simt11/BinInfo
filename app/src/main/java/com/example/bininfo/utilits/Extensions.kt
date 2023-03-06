@@ -23,6 +23,13 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = tr
     }
 }
 
+fun Fragment.replaceFragment(fragment: Fragment){
+    this.fragmentManager?.beginTransaction()
+        ?.addToBackStack(null)
+        ?.replace(R.id.dataContainer, fragment)
+        ?.commit()
+}
+
 fun Fragment.intentPhone(Phone: String) {
     val query: Uri = Uri.parse("tel:${Phone}")
     val intent = Intent(Intent.ACTION_DIAL, query)
