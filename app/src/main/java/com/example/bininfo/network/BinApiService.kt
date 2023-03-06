@@ -1,6 +1,5 @@
 package com.example.bininfo.network
 
-import com.example.bininfo.BinCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
@@ -16,8 +15,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface BinApiService {
-    @GET("{BIN}")
-    suspend fun getBinInfo(@Path("BIN", encoded = true) BIN: String): BinCard
+    @GET("{bin}")
+    suspend fun getBinInfo(@Path("bin", encoded = true) bin: String): BinCard
 }
 
 object BinApi{

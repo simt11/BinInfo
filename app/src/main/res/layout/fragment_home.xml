@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.screens.HomeFragment">
+    tools:context=".ui.screens.BinFragment">
 
     <TextView
         android:id="@+id/handCardNumber"
@@ -33,7 +33,6 @@
         android:layout_margin="@dimen/horizontal_margin"
         android:backgroundTint="@color/white"
         android:clickable="true"
-        android:contentDescription="TODO"
         android:scaleType="center"
         android:src="@drawable/baseline_check_circle_50"
         app:borderWidth="0sp"
@@ -50,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/enterCardNumber"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerSCHEME"
@@ -58,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textSCHEME"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/textBRAND"
@@ -66,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerSCHEME"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerBRAND"
@@ -74,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textBRAND"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/textLength"
@@ -82,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerBRAND"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerLength"
@@ -90,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLength"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/textLuhn"
@@ -98,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerLength"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerLuhn"
@@ -106,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLuhn"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/textType"
@@ -114,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerLuhn"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerType"
@@ -122,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textType"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/textPrepaid"
@@ -130,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerType"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerPrepaid"
@@ -138,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textPrepaid"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
     <!-- ******  Информация по стране  *************** -->
     <TextView
         android:id="@+id/textCountry"
@@ -146,7 +145,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerPrepaid"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerCountry"
@@ -154,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textCountry"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/answerCoordinates"
@@ -162,7 +161,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerCountry"
-        style="@style/answer_param"
+        style="@style/answerParam"
         android:clickable="true"/>
     <!-- ******  Информация по стране  *************** -->
 
@@ -173,7 +172,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerCoordinates"
-        style="@style/text_param" />
+        style="@style/textParam" />
 
     <TextView
         android:id="@+id/answerBankName"
@@ -181,7 +180,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textBank"
-        style="@style/answer_param" />
+        style="@style/answerParam" />
 
     <TextView
         android:id="@+id/answerBankUrl"
@@ -189,7 +188,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerBankName"
-        style="@style/answer_param"
+        style="@style/answerParam"
         android:clickable="true" />
 
     <TextView
@@ -198,7 +197,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerBankUrl"
-        style="@style/answer_param"
+        style="@style/answerParam"
         android:clickable="true" />
 
     <TextView
@@ -207,7 +206,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/answerBankPhone"
-        style="@style/answer_param"/>
+        style="@style/answerParam"/>
     <!-- ******  Информация по банку  *************** -->
 
 

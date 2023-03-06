@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bininfo.BinCard
+import com.example.bininfo.network.BinCard
 import com.example.bininfo.network.BinApi
 import kotlinx.coroutines.launch
 

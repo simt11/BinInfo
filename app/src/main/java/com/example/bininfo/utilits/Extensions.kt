@@ -1,16 +1,13 @@
 package com.example.bininfo.utilits
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.bininfo.R
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = true) {
@@ -49,15 +46,7 @@ fun Fragment.showToast(message: String) {
 }
 
 /*Открытие и скрытие клавиатуры*/
-fun View.showKeyboard() = (this.context as? Activity)?.showKeyboard()
-fun View.hideKeyboard() = (this.context as? Activity)?.hideKeyboard()
-
-fun Fragment.showKeyboard() = activity?.let(FragmentActivity::showKeyboard)
 fun Fragment.hideKeyboard() = activity?.hideKeyboard()
-
-fun Context.showKeyboard() = (this as? Activity)?.showKeyboard()
-fun Context.hideKeyboard() = (this as? Activity)?.hideKeyboard()
-
 fun Activity.showKeyboard() = WindowInsetsControllerCompat(window, window.decorView).show(
     WindowInsetsCompat.Type.ime()
 )

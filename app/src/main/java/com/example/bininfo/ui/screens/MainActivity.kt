@@ -1,9 +1,8 @@
-package com.example.bininfo
+package com.example.bininfo.ui.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bininfo.databinding.ActivityMainBinding
-import com.example.bininfo.ui.screens.HomeFragment
 import com.example.bininfo.utilits.replaceFragment
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        replaceFragment(HomeFragment(this), false)
+        replaceFragment(BinFragment(), false)
     }
 }

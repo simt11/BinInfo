@@ -1,4 +1,4 @@
-package com.example.bininfo
+package com.example.bininfo.network
 
 import kotlinx.serialization.Serializable
 
@@ -16,7 +16,7 @@ data class BinCard(
     class Number(
         val length: Int? = null,
         val luhn: Boolean? = null,
-    ) {}
+    )
 
     @Serializable
     class Country(
@@ -25,9 +25,9 @@ data class BinCard(
         val name: String? = null,
         val emoji: String? = null,
         val currency: String? = null,
-        val latitude: Int? = null,
-        val longitude: Int? = null,
-    ) {}
+        val latitude: Double? = null,
+        val longitude: Double? = null,
+    )
 
     @Serializable
     class Bank(
@@ -35,5 +35,5 @@ data class BinCard(
         val url: String? = null,
         val phone: String? = null,
         val city: String? = null,
-    ) {}
+    )
 }

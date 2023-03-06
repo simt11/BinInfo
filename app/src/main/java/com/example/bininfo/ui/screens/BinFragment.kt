@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.bininfo.BinCard
+import com.example.bininfo.network.BinCard
 import com.example.bininfo.R
 import com.example.bininfo.databinding.FragmentHomeBinding
 import com.example.bininfo.utilits.hideKeyboard
@@ -20,7 +20,7 @@ import com.example.bininfo.utilits.showToast
 val BIN_NUMBER: String = ""
 private const val MIN_LENGTH_CARD = 4
 
-class HomeFragment(context: Context) : Fragment(R.layout.fragment_home) {
+class BinFragment() : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: BinViewModel
     private lateinit var preferences: SharedPreferences
