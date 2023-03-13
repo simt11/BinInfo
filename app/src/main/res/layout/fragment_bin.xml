@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.screens.BinFragment">
+
+    <TextView
+        android:id="@+id/handCardNumber"
+        android:text="@string/enter_card_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/textH1" />
+
+    <EditText
+        android:id="@+id/enterCardNumber"
+        android:hint="@string/hint_card_number"
+        android:maxLength="8"
+        android:inputType="number"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/handCardNumber"
+        style="@style/editCard" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/register_btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/horizontal_margin"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:scaleType="center"
+        android:src="@drawable/baseline_check_circle_50"
+        app:borderWidth="0sp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="@id/enterCardNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/enterCardNumber"
+        app:layout_constraintTop_toTopOf="@id/enterCardNumber"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textSCHEME"
+        android:text="@string/text_sheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterCardNumber"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerSCHEME"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSCHEME"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/textBRAND"
+        android:text="@string/text_brand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerSCHEME"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerBRAND"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBRAND"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/textLength"
+        android:text="@string/text_length"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBRAND"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerLength"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLength"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/textLuhn"
+        android:text="@string/text_luhn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerLength"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerLuhn"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLuhn"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/textType"
+        android:text="@string/text_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerLuhn"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerType"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textType"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/textPrepaid"
+        android:text="@string/text_prepaid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerType"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerPrepaid"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textPrepaid"
+        style="@style/answerParam" />
+    <!-- ******  Информация по стране  *************** -->
+    <TextView
+        android:id="@+id/textCountry"
+        android:text="@string/text_country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerPrepaid"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerCountry"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textCountry"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/answerCoordinates"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerCountry"
+        style="@style/answerParam"
+        android:clickable="true"/>
+    <!-- ******  Информация по стране  *************** -->
+
+    <!-- ******  Информация по банку  *************** -->
+    <TextView
+        android:id="@+id/textBank"
+        android:text="@string/text_bank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerCoordinates"
+        style="@style/textParam" />
+
+    <TextView
+        android:id="@+id/answerBankName"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBank"
+        style="@style/answerParam" />
+
+    <TextView
+        android:id="@+id/answerBankUrl"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankName"
+        style="@style/answerParam"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/answerBankPhone"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankUrl"
+        style="@style/answerParam"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/answerBankCity"
+        android:hint="@string/hint_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerBankPhone"
+        style="@style/answerParam"/>
+    <!-- ******  Информация по банку  *************** -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonHistory"
+        android:text="@string/buttonHistory"
+        android:paddingStart="17dp"
+        android:paddingEnd="17dp"
+        android:background="@color/BaseColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answerBankCity" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
