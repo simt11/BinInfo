@@ -1,4 +1,4 @@
-package com.example.bininfo.ui.screens
+package com.example.bininfo.ui.screens.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
