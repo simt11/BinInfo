@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CardData (
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @NonNull @ColumnInfo(name = "card_number") val cardNumber: String
 )

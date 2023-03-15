@@ -1,7 +1,7 @@
 package com.example.bininfo.ui.screens
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bininfo.databinding.ActivityMainBinding
 import com.example.bininfo.utilits.replaceFragment
 
@@ -12,10 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
     override fun onStart() {
         super.onStart()
         replaceFragment(BinFragment(), false)
     }
+
+
 }

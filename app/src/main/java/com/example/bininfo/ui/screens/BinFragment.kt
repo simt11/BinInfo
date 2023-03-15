@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bininfo.R
+import com.example.bininfo.database.AppDatabase
 import com.example.bininfo.database.CardDao
 import com.example.bininfo.database.CardData
 import com.example.bininfo.databinding.FragmentBinBinding
@@ -20,6 +21,8 @@ import com.example.bininfo.utilits.intentPhone
 import com.example.bininfo.utilits.intentUrl
 import com.example.bininfo.utilits.replaceFragment
 import com.example.bininfo.utilits.showToast
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 val BIN_NUMBER: String = ""
 private const val MIN_LENGTH_CARD = 4
@@ -28,6 +31,16 @@ class BinFragment() : Fragment() {
     private lateinit var binding: FragmentBinBinding
     private lateinit var viewModel: BinViewModel
     private lateinit var preferences: SharedPreferences
+    private lateinit var mainActivity: MainActivity
+    private lateinit var db: AppDatabase
+    private lateinit var cardDao: CardDao
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+        db = AppDatabase.getDatabase(requireContext())
+        cardDao = db.cardDao()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,13 +62,13 @@ class BinFragment() : Fragment() {
             false
         }
         binding.enterCardNumber.setOnClickListener {
-/*            val saveCardNumber = CardData()
-            CardDao.inse*/
-            true }
+            true
+        }
         binding.registerBtnNext.setOnClickListener {
             val string = binding.enterCardNumber.text.toString()
             if (string.length > MIN_LENGTH_CARD) {
                 hideKeyboard()
+                saveCardNumber(string)
                 viewModel.getBinInfo(string)
                 viewModel.binUiStatus.observe(viewLifecycleOwner) { listResults ->
                     setValue(listResults)
@@ -88,6 +101,13 @@ class BinFragment() : Fragment() {
         }
     }
 
+    private fun saveCardNumber(number: String) {
+        val cardData = CardData(cardNumber = number)
+        GlobalScope.launch {
+            cardDao.insertCardData(cardData)
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         val editor = preferences.edit()
@@ -112,7 +132,8 @@ class BinFragment() : Fragment() {
         binding.answerType.text = listResults.type
         binding.answerPrepaid.text = listResults.prepaid?.toString()
         binding.answerCountry.text = listResults.country?.name
-        binding.answerCoordinates.text = "${listResults.country?.latitude}, ${listResults.country?.longitude}"
+        binding.answerCoordinates.text =
+            "${listResults.country?.latitude}, ${listResults.country?.longitude}"
         binding.answerBankName.text = listResults.bank?.name
         binding.answerBankUrl.text = listResults.bank?.url
         binding.answerBankPhone.text = listResults.bank?.phone

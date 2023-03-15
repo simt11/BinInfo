@@ -4,26 +4,27 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-@Database(entities = arrayOf(CardData::class), version = 1)
-abstract class AppDatabase: RoomDatabase() {
-    abstract fun CardDao(): CardDao
+@Database(entities = [CardData::class], version = 1, exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun cardDao(): CardDao
 
-    companion object{
+    companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase{
-            return INSTANCE ?: synchronized(this){
+        fun getDatabase(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context,
+                    context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database"
+                    "app_database.db"
                 )
                     .createFromAsset("database/card_number.db")
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
-                instance
+                return instance
             }
         }
     }
