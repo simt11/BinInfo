@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bininfo.database.AppDatabase
@@ -16,32 +14,29 @@ import com.example.bininfo.database.CardDao
 import com.example.bininfo.databinding.FragmentHistoryBinding
 import com.example.bininfo.ui.screens.viewmodel.CardNumberViewModel
 import com.example.bininfo.ui.screens.viewmodel.CardNumberViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collectLatest
+import com.example.bininfo.utilits.replaceFragment
+import com.example.bininfo.utilits.showToast
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), CardNumberAdapter.OnItemClickListener {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardNumberAdapter: CardNumberAdapter
     private lateinit var db: AppDatabase
     private lateinit var cardDao: CardDao
-    private val viewModel: CardNumberViewModel by viewModels()
 
-/*    private val viewModel: CardNumberViewModel by activityViewModels {
+    private val viewModel: CardNumberViewModel by activityViewModels {
         CardNumberViewModelFactory(
             (activity?.application as CardNumberApplication).database.cardDao()
         )
-    }*/
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         db = AppDatabase.getDatabase(requireContext())
         cardDao = db.cardDao()
-        cardNumberAdapter = CardNumberAdapter({})
+        cardNumberAdapter = CardNumberAdapter(this)
     }
 
     override fun onCreateView(
@@ -56,27 +51,25 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val cardNumberAdapter = CardNumberAdapter({})
         recyclerView.adapter = cardNumberAdapter
 
-        lifecycleScope.launch {
-            viewModel.fullCardNumber().collectLatest { cardDataList ->
-                cardDataList.subList(cardDataList)
-            }
-        }
-/*        viewModel.fullCardNumber().collect(viewLifecycleOwner){cardDataList ->
-            cardDataList.sub
-
-        }*/
-/*        lifecycle.coroutineScope.launch {
-            viewModel.fullCardNumber().collect(){
+        lifecycle.coroutineScope.launch {
+            viewModel.fullCardNumber().collect {
                 cardNumberAdapter.submitList(it)
             }
-        }*/
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(cardNumber: String) {
+        val bundle = Bundle()
+        bundle.putString("CardNumber", cardNumber)
+        val frag = BinFragment()
+        frag.arguments = bundle
+        replaceFragment(BinFragment())
     }
 }

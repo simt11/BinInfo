@@ -9,8 +9,13 @@ import com.example.bininfo.database.CardData
 import com.example.bininfo.databinding.CardNumberItemBinding
 
 class CardNumberAdapter(
-    private val onItemClicked: (CardData) -> Unit,
+    private val listener: OnItemClickListener,
 ) : ListAdapter<CardData, CardNumberAdapter.CardNumberViewHolder>(DiffCallback) {
+
+    // Пользовательский интерфейс
+    interface OnItemClickListener {
+        fun onItemClick(cardNumber: String)
+    }
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<CardData>() {
@@ -34,13 +39,15 @@ class CardNumberAdapter(
         )
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
-            onItemClicked(getItem(position))
+            val cardData: CardData = getItem(position)
+            listener.onItemClick(cardData.cardNumber)
         }
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: CardNumberViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 
     class CardNumberViewHolder(
@@ -50,5 +57,4 @@ class CardNumberAdapter(
             binding.cardNumber.text = cardData.cardNumber
         }
     }
-
 }

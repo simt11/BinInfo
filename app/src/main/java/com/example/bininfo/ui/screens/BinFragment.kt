@@ -42,6 +42,13 @@ class BinFragment() : Fragment() {
         cardDao = db.cardDao()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments?.getString("CardNumber").toString() != null){
+            binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
+            showToast(arguments?.getString("CardNumber").toString())}
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +71,8 @@ class BinFragment() : Fragment() {
         binding.enterCardNumber.setOnClickListener {
             true
         }
+
+
         binding.registerBtnNext.setOnClickListener {
             val string = binding.enterCardNumber.text.toString()
             if (string.length > MIN_LENGTH_CARD) {
@@ -123,6 +132,18 @@ class BinFragment() : Fragment() {
             binding.enterCardNumber.setText(string)
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        if(preferences.contains(BIN_NUMBER)){
+            preferences.edit().clear().apply()
+        }
+    }
+
+    /*    override fun onDestroy() {
+        super.onDestroy()
+
+    }*/
 
     fun setValue(listResults: BinCard) {
         binding.answerSCHEME.text = listResults.scheme
