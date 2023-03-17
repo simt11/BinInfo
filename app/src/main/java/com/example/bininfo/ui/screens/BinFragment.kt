@@ -42,13 +42,6 @@ class BinFragment() : Fragment() {
         cardDao = db.cardDao()
     }
 
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments?.getString("CardNumber").toString() != null){
-            binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
-            showToast(arguments?.getString("CardNumber").toString())}
-    }*/
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,16 +66,14 @@ class BinFragment() : Fragment() {
 
         binding.registerBtnNext.setOnClickListener {
             val string = binding.enterCardNumber.text.toString()
-            if (string.length > MIN_LENGTH_CARD) {
-                hideKeyboard()
-                saveCardNumber(string)
+            hideKeyboard()
+/*            if (string.length > MIN_LENGTH_CARD) {
+                saveCardNumber(string)*/
                 viewModel.getBinInfo(string)
-                viewModel.binUiStatus.observe(viewLifecycleOwner) { listResults ->
-                    setValue(listResults)
-                }
-            } else {
+                viewModel.binUiStatus.observe(viewLifecycleOwner) {setValue(it)}
+/*            } else {
                 showToast(getString(R.string.toast_min_number))
-            }
+            }*/
         }
 
         binding.answerCoordinates.setOnClickListener {

@@ -1,6 +1,7 @@
 package com.example.bininfo.utilits
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
@@ -51,6 +52,10 @@ fun Fragment.intentCoordinates(Coordinates: String) {
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun showToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
 /*Открытие и скрытие клавиатуры*/
