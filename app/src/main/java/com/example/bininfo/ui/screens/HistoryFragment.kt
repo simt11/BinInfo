@@ -70,6 +70,6 @@ class HistoryFragment : Fragment(), CardNumberAdapter.OnItemClickListener {
         bundle.putString("CardNumber", cardNumber)
         val frag = BinFragment()
         frag.arguments = bundle
-        replaceFragment(BinFragment())
+        replaceFragment(frag)
     }
 }

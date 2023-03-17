@@ -42,12 +42,12 @@ class BinFragment() : Fragment() {
         cardDao = db.cardDao()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+/*    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments?.getString("CardNumber").toString() != null){
             binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
             showToast(arguments?.getString("CardNumber").toString())}
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,14 +56,12 @@ class BinFragment() : Fragment() {
     ): View? {
         this.binding = FragmentBinBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this).get(BinViewModel::class.java)
-
         binding.root.setOnTouchListener { _, _ ->
             hideKeyboard()
             false
@@ -110,40 +108,25 @@ class BinFragment() : Fragment() {
         }
     }
 
-    private fun saveCardNumber(number: String) {
-        val cardData = CardData(cardNumber = number)
-        GlobalScope.launch {
-            cardDao.insertCardData(cardData)
-        }
-    }
-
     override fun onPause() {
         super.onPause()
         val editor = preferences.edit()
         val string = binding.enterCardNumber.text.toString()
         editor.putString(BIN_NUMBER, string)
-        editor.apply()
+        editor.commit()
     }
 
     override fun onResume() {
         super.onResume()
         if (preferences.contains(BIN_NUMBER)) {
             val string = preferences.getString(BIN_NUMBER, "")
-            binding.enterCardNumber.setText(string)
+            if (arguments?.getString("CardNumber").isNullOrEmpty()) {
+                binding.enterCardNumber.setText(string)
+            } else {
+                binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
+            }
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        if(preferences.contains(BIN_NUMBER)){
-            preferences.edit().clear().apply()
-        }
-    }
-
-    /*    override fun onDestroy() {
-        super.onDestroy()
-
-    }*/
 
     fun setValue(listResults: BinCard) {
         binding.answerSCHEME.text = listResults.scheme
@@ -160,4 +143,12 @@ class BinFragment() : Fragment() {
         binding.answerBankPhone.text = listResults.bank?.phone
         binding.answerBankCity.text = listResults.bank?.city
     }
+
+    private fun saveCardNumber(number: String) {
+        val cardData = CardData(cardNumber = number)
+        GlobalScope.launch {
+            cardDao.insertCardData(cardData)
+        }
+    }
+
 }
