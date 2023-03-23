@@ -1,14 +1,12 @@
 package com.example.bininfo.ui.screens
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.bininfo.R
 import com.example.bininfo.database.AppDatabase
 import com.example.bininfo.database.CardDao
 import com.example.bininfo.database.CardData
@@ -16,21 +14,13 @@ import com.example.bininfo.databinding.FragmentBinBinding
 import com.example.bininfo.network.BinCard
 import com.example.bininfo.ui.screens.viewmodel.BinViewModel
 import com.example.bininfo.utilits.hideKeyboard
-import com.example.bininfo.utilits.intentCoordinates
-import com.example.bininfo.utilits.intentPhone
-import com.example.bininfo.utilits.intentUrl
 import com.example.bininfo.utilits.replaceFragment
-import com.example.bininfo.utilits.showToast
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
-val BIN_NUMBER: String = ""
-private const val MIN_LENGTH_CARD = 4
 
 class BinFragment() : Fragment() {
     private lateinit var binding: FragmentBinBinding
     private lateinit var viewModel: BinViewModel
-    private lateinit var preferences: SharedPreferences
     private lateinit var mainActivity: MainActivity
     private lateinit var db: AppDatabase
     private lateinit var cardDao: CardDao
@@ -53,7 +43,7 @@ class BinFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
+        //preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this).get(BinViewModel::class.java)
         binding.root.setOnTouchListener { _, _ ->
             hideKeyboard()
@@ -66,32 +56,37 @@ class BinFragment() : Fragment() {
 
         binding.registerBtnNext.setOnClickListener {
             val string = binding.enterCardNumber.text.toString()
-            hideKeyboard()
-/*            if (string.length > MIN_LENGTH_CARD) {
-                saveCardNumber(string)*/
-                viewModel.getBinInfo(string)
-                viewModel.binUiStatus.observe(viewLifecycleOwner) {setValue(it)}
-/*            } else {
-                showToast(getString(R.string.toast_min_number))
-            }*/
+            viewModel.getBinInfo(string)
+            viewModel.viewFlag.observe(viewLifecycleOwner) {
+                if (it.isMinLength) {
+                    hideKeyboard()
+                    saveCardNumber(string)
+                    viewModel.binUiStatus.observe(viewLifecycleOwner) {
+                        setValue(it)
+                    }
+                }
+            }
         }
 
         binding.answerCoordinates.setOnClickListener {
             val coordinates = binding.answerCoordinates.text.toString()
-            if (coordinates.isNotEmpty()) {
-                intentCoordinates(coordinates)
+            viewModel.answerCoordinat(coordinates)
+            viewModel.intent.observe(viewLifecycleOwner) {
+                requireActivity().startActivity(it)
             }
         }
         binding.answerBankUrl.setOnClickListener {
             val bankUrl = binding.answerBankUrl.text.toString()
-            if (bankUrl.isNotEmpty()) {
-                intentUrl(bankUrl)
+            viewModel.answerBankUrl(bankUrl)
+            viewModel.intent.observe(viewLifecycleOwner) {
+                requireActivity().startActivity(it)
             }
         }
         binding.answerBankPhone.setOnClickListener {
             val bankPhone = binding.answerBankPhone.text.toString()
-            if (bankPhone.isNotEmpty()) {
-                intentPhone(bankPhone)
+            viewModel.answerBankPhone(bankPhone)
+            viewModel.intent.observe(viewLifecycleOwner) {
+                requireActivity().startActivity(it)
             }
         }
         binding.buttonHistory.setOnClickListener {
@@ -101,22 +96,14 @@ class BinFragment() : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        val editor = preferences.edit()
         val string = binding.enterCardNumber.text.toString()
-        editor.putString(BIN_NUMBER, string)
-        editor.commit()
+        viewModel.prefOnPause(string)
     }
 
     override fun onResume() {
         super.onResume()
-        if (preferences.contains(BIN_NUMBER)) {
-            val string = preferences.getString(BIN_NUMBER, "")
-            if (arguments?.getString("CardNumber").isNullOrEmpty()) {
-                binding.enterCardNumber.setText(string)
-            } else {
-                binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
-            }
-        }
+        val string = arguments?.getString("CardNumber").toString()
+        viewModel.prefOnResume(string)
     }
 
     fun setValue(listResults: BinCard) {

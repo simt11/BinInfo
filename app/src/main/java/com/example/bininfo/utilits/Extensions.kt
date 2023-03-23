@@ -25,29 +25,29 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = tr
     }
 }
 
-fun Fragment.replaceFragment(fragment: Fragment){
+fun Fragment.replaceFragment(fragment: Fragment) {
     this.fragmentManager?.beginTransaction()
         ?.addToBackStack(null)
         ?.replace(R.id.dataContainer, fragment)
         ?.commit()
 }
 
-fun Fragment.intentPhone(Phone: String) {
+fun intentPhone(Phone: String): Intent {
     val query: Uri = Uri.parse("tel:${Phone}")
     val intent = Intent(Intent.ACTION_DIAL, query)
-    requireActivity().startActivity(intent)
+    return intent
 }
 
-fun Fragment.intentUrl(Url: String) {
+fun intentUrl(Url: String): Intent {
     val queryUrl: Uri = Uri.parse("https://${Url}")
     val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-    requireActivity().startActivity(intent)
+    return intent
 }
 
-fun Fragment.intentCoordinates(Coordinates: String) {
+fun intentCoordinates(Coordinates: String): Intent {
     val queryCoordinates: Uri = Uri.parse("geo:${Coordinates}")
     val intent = Intent(Intent.ACTION_VIEW, queryCoordinates)
-    requireActivity().startActivity(intent)
+    return intent
 }
 
 fun Fragment.showToast(message: String) {
