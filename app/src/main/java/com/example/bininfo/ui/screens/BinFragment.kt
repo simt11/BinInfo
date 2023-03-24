@@ -1,10 +1,12 @@
 package com.example.bininfo.ui.screens
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bininfo.database.AppDatabase
@@ -15,15 +17,19 @@ import com.example.bininfo.network.BinCard
 import com.example.bininfo.ui.screens.viewmodel.BinViewModel
 import com.example.bininfo.utilits.hideKeyboard
 import com.example.bininfo.utilits.replaceFragment
+import com.example.bininfo.utilits.showToast
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class BinFragment() : Fragment() {
+
+    private val BIN_NUMBER: String = ""
     private lateinit var binding: FragmentBinBinding
     private lateinit var viewModel: BinViewModel
     private lateinit var mainActivity: MainActivity
     private lateinit var db: AppDatabase
     private lateinit var cardDao: CardDao
+    private lateinit var preferences: SharedPreferences
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,7 +37,12 @@ class BinFragment() : Fragment() {
         db = AppDatabase.getDatabase(requireContext())
         cardDao = db.cardDao()
     }
-
+/*    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments?.getString("CardNumber") != null){
+            binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
+            showToast(arguments?.getString("CardNumber").toString())}
+    }*/
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,8 +54,13 @@ class BinFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
+        preferences = requireActivity().getSharedPreferences("BIN", Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this).get(BinViewModel::class.java)
+        val string = arguments?.getString("CardNumber")
+        if ( string != null){
+            binding.enterCardNumber.setText(string.toString(),TextView.BufferType.NORMAL)
+            showToast(string.toString())
+        }
         binding.root.setOnTouchListener { _, _ ->
             hideKeyboard()
             false
@@ -92,18 +108,6 @@ class BinFragment() : Fragment() {
         binding.buttonHistory.setOnClickListener {
             replaceFragment(HistoryFragment())
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        val string = binding.enterCardNumber.text.toString()
-        viewModel.prefOnPause(string)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val string = arguments?.getString("CardNumber").toString()
-        viewModel.prefOnResume(string)
     }
 
     fun setValue(listResults: BinCard) {
