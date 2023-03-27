@@ -103,7 +103,6 @@ class BinFragment() : Fragment() {
             replaceFragment(HistoryFragment())
         }
     }
-
     fun setValue(listResults: BinCard) {
         binding.answerSCHEME.text = listResults.scheme
         binding.answerBRAND.text = listResults.brand
