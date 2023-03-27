@@ -37,12 +37,7 @@ class BinFragment() : Fragment() {
         db = AppDatabase.getDatabase(requireContext())
         cardDao = db.cardDao()
     }
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments?.getString("CardNumber") != null){
-            binding.enterCardNumber.setText(arguments?.getString("CardNumber").toString())
-            showToast(arguments?.getString("CardNumber").toString())}
-    }*/
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +54,6 @@ class BinFragment() : Fragment() {
         val string = arguments?.getString("CardNumber")
         if ( string != null){
             binding.enterCardNumber.setText(string.toString(),TextView.BufferType.NORMAL)
-            showToast(string.toString())
         }
         binding.root.setOnTouchListener { _, _ ->
             hideKeyboard()
