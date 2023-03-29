@@ -68,24 +68,27 @@ class BinFragment() : Fragment() {
         binding.registerBtnNext.setOnClickListener {
             val number = binding.enterCardNumber.text.toString()
             viewModel.getBinInfo(number)
-            observeFlag(viewModel.viewFlag, number)
         }
+        observeFlag(viewModel.viewFlag)
+        observeBinUiStatus(viewModel.binUiStatus)
 
         binding.answerCoordinates.setOnClickListener {
             val coordinates = binding.answerCoordinates.text.toString()
             viewModel.answerCoordinat(coordinates)
-            observeIntante(viewModel.intent)
         }
+
         binding.answerBankUrl.setOnClickListener {
             val bankUrl = binding.answerBankUrl.text.toString()
             viewModel.answerBankUrl(bankUrl)
-            observeIntante(viewModel.intent)
         }
+
         binding.answerBankPhone.setOnClickListener {
             val bankPhone = binding.answerBankPhone.text.toString()
             viewModel.answerBankPhone(bankPhone)
-            observeIntante(viewModel.intent)
         }
+
+        observeIntent(viewModel.intent)
+
         binding.buttonHistory.setOnClickListener {
             replaceFragment(HistoryFragment())
         }
@@ -114,12 +117,11 @@ class BinFragment() : Fragment() {
         }
     }
 
-    fun observeFlag(liveData: LiveData<ViewFlag>, number: String) {
+    fun observeFlag(liveData: LiveData<ViewFlag>) {
         liveData.observe(viewLifecycleOwner) {
             if (it.isMinLength) {
                 hideKeyboard()
-                saveCardNumber(number)
-                observeBinUiStatus(viewModel.binUiStatus)
+                saveCardNumber(it.number)
             }
         }
     }
@@ -130,7 +132,7 @@ class BinFragment() : Fragment() {
         }
     }
 
-    fun observeIntante(liveData: LiveData<Intent>) {
+    fun observeIntent(liveData: LiveData<Intent>) {
         liveData.observe(viewLifecycleOwner) {
             requireActivity().startActivity(it)
         }

@@ -24,10 +24,10 @@ class BinViewModel() : ViewModel() {
 
     fun getBinInfo(bin: String) {
         if (bin.length < MIN_LENGTH_CARD) {
-            _viewFlag.value = ViewFlag(false, false)
+            _viewFlag.value = ViewFlag(false,  false, "")
         } else {
             setBinStatus(bin)
-            _viewFlag.value = ViewFlag(true, true)
+            _viewFlag.value = ViewFlag(true, true, bin)
         }
     }
 
