@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">BinInfo</string>
+    <string name="enter_card_number">Введите первые 8 цифр номера карты</string>
+    <string name="hint_card_number">- - - -  - - - -</string>
+    <string name="text_sheme">Платежная система:</string>
+    <string name="text_brand">Бренд:</string>
+    <string name="text_length">Длина номера карты:</string>
+    <string name="text_luhn">Алгоритм Луна:</string>
+    <string name="text_type">Тип карты:</string>
+    <string name="text_prepaid">Предоплата:</string>
+    <string name="text_country">Страна:</string>
+    <string name="text_bank">Банк</string>
+    <string name="hint_answer">...</string>
+    <string name="toast_min_number">Введите минимум 5 цифр номера карты.</string>
+    <string name="buttonHistory">История запросов</string>
+    <string name="text_history_card_number">История запросов</string>
 </resources>
