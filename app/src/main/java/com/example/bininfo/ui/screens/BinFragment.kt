@@ -64,13 +64,14 @@ class BinFragment() : Fragment() {
             true
         }
 
+        observeFlag(viewModel.viewFlag)
+        observeBinUiStatus(viewModel.binUiStatus)
+        observeIntent(viewModel.intent)
 
         binding.registerBtnNext.setOnClickListener {
             val number = binding.enterCardNumber.text.toString()
             viewModel.getBinInfo(number)
         }
-        observeFlag(viewModel.viewFlag)
-        observeBinUiStatus(viewModel.binUiStatus)
 
         binding.answerCoordinates.setOnClickListener {
             val coordinates = binding.answerCoordinates.text.toString()
@@ -86,8 +87,6 @@ class BinFragment() : Fragment() {
             val bankPhone = binding.answerBankPhone.text.toString()
             viewModel.answerBankPhone(bankPhone)
         }
-
-        observeIntent(viewModel.intent)
 
         binding.buttonHistory.setOnClickListener {
             replaceFragment(HistoryFragment())
